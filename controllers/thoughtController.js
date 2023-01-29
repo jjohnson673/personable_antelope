@@ -78,7 +78,34 @@ module.exports = {
 
       //create reaciton
 
+      createReaction(req, res) {
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtID },
+          { $addToSet: { reactions: req.body } },
+          { runValidators: true, new: true }
+        )
+          .then((thought) =>
+            !thought
+              ? res.status(404).json({ message: "No thought is associated with this ID" })
+              : res.json(thought)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+
 
       //delete reaction
-
+      deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtID },
+          { $pull: { reactions: { reactionID: req.params.reactionID } } },
+          { runValidators: true, new: true }
+        )
+          .then((thought) =>
+            !thought
+              ? res.status(404).json({ message: "No thought is associated with this ID" })
+              : res.json(thought)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+    };
       
