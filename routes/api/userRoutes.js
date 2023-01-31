@@ -19,7 +19,7 @@ router.route('/').get(getUser).post(createUser);
 
 
 // /api/users/:userId GET one user, PUT and DELETE by user's ID
-router.route('/:userID')
+router.route('/:userId')
 .get(getIndvUser)
 .put(updateUser)
 .delete(deleteUser);
@@ -29,7 +29,7 @@ router.route('/:userID')
 
 // /api/users/:userId/friends/:friendId POST and DELETE a friend by ID
 
-router.route('/:userID/friends/:friendID')
+router.route('/:userId/friends/:friendId')
 .post(addFriend)
 .delete(deleteFriend);
 

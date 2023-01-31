@@ -18,7 +18,7 @@ router.route('/').get(getThought).post(createThought);
 
 
 // /api/thoughts/:thoughtId GET single thought, PUT and DELETE by iD
-router.route('/:thoughtID')
+router.route('/:thoughtId')
 .get(getIndvThought)
 .put(updateThought)
 .delete(deleteThought);
@@ -27,7 +27,7 @@ router.route('/:thoughtID')
 
 
 //  /api/thoughts/:thoughtId/reactions POST new reactions
-router.route('/:thoughtID/reactions')
+router.route('/:thoughtId/reactions')
 .post(createReaction);
 
 
@@ -35,7 +35,7 @@ router.route('/:thoughtID/reactions')
 
 // /api/thoughts/:thoughtId/reactions/:reactionId DELETE reaction by ID
 
-router.route('/:thoughtID/reactions/:reactionID')
+router.route('/:thoughtId/reactions/:reactionId')
 .delete(deleteReaction);
 
 

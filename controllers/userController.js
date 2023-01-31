@@ -10,7 +10,7 @@ module.exports = {
 
   //get individual user
   getIndvUser(req, res) {
-    User.findOne({ _id: req.params.userID })
+    User.findOne({ _id: req.params.userId })
       .populate("thoughts")
       .populate("friends")
       .select("-__v")
@@ -34,7 +34,7 @@ module.exports = {
   //update user
   updateUser(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userID },
+      { _id: req.params.userId },
       { $set: req.body },
       { runValidators: true, new: true }
     )
@@ -49,8 +49,8 @@ module.exports = {
   // add friend
   addFriend(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userID },
-      { $addToSet: { friends: req.params.friendID } },
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
@@ -64,8 +64,8 @@ module.exports = {
   // delete friend
   deleteFriend(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userID },
-      { $pull: { friends: req.params.friendID } },
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
       { new: true }
     )
       .then(
@@ -82,7 +82,7 @@ module.exports = {
   //Delete user with extra credit: remove associated thoughts when user is deleted
 
   deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userID })
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found associated with this ID" })
